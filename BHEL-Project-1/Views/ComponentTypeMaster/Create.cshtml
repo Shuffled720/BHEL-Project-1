@@ -1,0 +1,47 @@
+﻿@model ComponentTypeMaster
+@{
+    ViewData["Title"] = "Create Component Type Master";
+}
+
+<h2>Create Component Type Master</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Identity_Number" class="control-label"></label>
+        <input asp-for="Identity_Number" class="form-control" />
+        <span asp-validation-for="Identity_Number" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Make" class="control-label"></label>
+        <input asp-for="Make" class="form-control" />
+        <span asp-validation-for="Make" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Is_Ind" class="control-label"></label>
+        <input type="checkbox"  asp-for="Is_Ind"  />
+        <span asp-validation-for="Is_Ind" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Location" class="control-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Reference_Doc" class="control-label"></label>
+        <input asp-for="Reference_Doc" class="form-control" />
+        <span asp-validation-for="Reference_Doc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Is_BOI" class="control-label"></label>
+        <input type="checkbox"  asp-for="Is_BOI"  />
+        <span asp-validation-for="Is_BOI" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ComponentMasterId" class="control-label">Component Master</label>
+        <select asp-for="ComponentMasterId" class="form-control" asp-items="ViewBag.ComponentMasterId"></select>
+        <span asp-validation-for="ComponentMasterId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

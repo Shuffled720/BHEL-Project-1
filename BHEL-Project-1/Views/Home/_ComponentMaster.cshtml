@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<ComponentMaster>
+@{
+    ViewData["Title"] = "Component Master List";
+}
+
+<h2>Component Master List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Component_Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Component_Ref_Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Updated_By)</th>
+            <th>@Html.DisplayNameFor(model => model.Updated_On)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Component_Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Component_Ref_Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Updated_By)</td>
+                <td>@Html.DisplayFor(modelItem => item.Updated_On)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "ComponentMaster" , new { id = item.ComponentMasterId }) |
+                    @Html.ActionLink("Delete", "Delete", "ComponentMaster", new { id = item.ComponentMasterId })
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "ComponentMaster")
+</p>
