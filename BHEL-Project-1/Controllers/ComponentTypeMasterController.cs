@@ -86,7 +86,7 @@ public class ComponentTypeMasterController : Controller
             return RedirectToAction("Index", "Home");
         }
         ViewData["ComponentMasterId"] = new SelectList(_context.ComponentMaster, "ComponentMasterId", "Component_Name", componentTypeMaster.ComponentMasterId);
-        return View(componentTypeMaster); return RedirectToAction("Index", "Home");
+        return View(componentTypeMaster);
     }
 
     public async Task<IActionResult> Delete(int? id)
@@ -112,6 +112,10 @@ public class ComponentTypeMasterController : Controller
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var componentTypeMaster = await _context.ComponentTypeMaster.FindAsync(id);
+        if(componentTypeMaster == null)
+		{
+			return NotFound();
+		}
         _context.ComponentTypeMaster.Remove(componentTypeMaster);
         await _context.SaveChangesAsync();
         return RedirectToAction("Index", "Home");

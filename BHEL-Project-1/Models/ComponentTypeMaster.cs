@@ -12,5 +12,20 @@
         public int Applicable_Item_Id { get; set; }
         public int ComponentMasterId { get; set; }
         public ComponentMaster? ComponentMaster { get; set; } // Navigation property
+
+        public ComponentTypeMaster()
+        {
+            ComponentMasterId = 0;
+            Identity_Number = string.Empty;
+            Make = string.Empty;
+            Is_Ind = false;
+            Location = string.Empty;
+            Reference_Doc = string.Empty;
+            Is_BOI = false;
+            Applicable_Item_Id = 0;
+            ComponentMasterId = 0;
+            ComponentMaster = null;
+
+        }
     }
 }

@@ -106,8 +106,9 @@ public class ComponentMasterController : Controller
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var componentMaster = await _context.ComponentMaster.FindAsync(id);
-        _context.ComponentMaster.Remove(componentMaster);
-        await _context.SaveChangesAsync();
+        if(componentMaster!=null)
+            _context.ComponentMaster.Remove(componentMaster);
+            await _context.SaveChangesAsync();
         return RedirectToAction("Index", "Home");
     }
 
