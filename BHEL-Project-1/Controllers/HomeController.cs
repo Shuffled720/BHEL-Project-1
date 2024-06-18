@@ -65,30 +65,45 @@ namespace BHEL_Project_1.Controllers
 				}
 				using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read))
 				{
-
 					using (var reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream))
 					{
-
 						do
 						{
-							//bool isHeaderSkipped = false;
-							int headerLines=5;
+							int headerLines=5;//to skip 5 lines of header in excel sheet
 							while (reader.Read())
 							{
-								if (headerLines!=0)
+								if (headerLines != 0)
 								{
 									headerLines--;
 									continue;
 								}
-								var name = reader.GetValue(2).ToString();
-								// reader.GetDouble(0);
-								//School school = new School();
-								//school.Name = reader.GetValue(1).ToString();
-								//school.Marks = Convert.ToInt32(reader.GetValue(2));
+								var componentMasterName= reader.GetValue(1).ToString();
+								int id=_context.ComponentMaster.Where(x=>x.Component_Name==componentMasterName).Select(x=>x.ComponentMasterId).FirstOrDefault<int>();
+								if (id == 0) //if component master not found
+								{
+									ComponentMaster componentMaster = new ComponentMaster();
+									componentMaster.Component_Name = reader.GetValue(1).ToString();
+									componentMaster.Component_Ref_Name= reader.GetValue(2).ToString();
+									componentMaster.Updated_By = "Admin";
+									
+									_context.Add(componentMaster);
+									await _context.SaveChangesAsync();
+								}
+								//now finding the id of the component master
+                                 id = _context.ComponentMaster.Where(x => x.Component_Name == componentMasterName).Select(x => x.ComponentMasterId).FirstOrDefault<int>();
 
-								//_context.Add(school);
-								//await _context.SaveChangesAsync();
 
+                                ComponentTypeMaster componentTypeMaster = new ComponentTypeMaster();
+								componentTypeMaster.Identity_Number= reader.GetValue(3).ToString();
+								componentTypeMaster.Make = reader.GetValue(5).ToString();
+								componentTypeMaster.Is_Ind = true;
+								componentTypeMaster.Location = reader.GetValue(7).ToString();
+								componentTypeMaster.Reference_Doc = reader.GetValue(8).ToString();
+								componentTypeMaster.Is_BOI = true;
+                                componentTypeMaster.Applicable_Item_Id = 4;//doubt regarding this
+                                componentTypeMaster.ComponentMasterId= id;
+								_context.Add(componentTypeMaster);
+								await _context.SaveChangesAsync();
 							}
 						} while (reader.NextResult());
 
