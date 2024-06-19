@@ -77,6 +77,10 @@ namespace BHEL_Project_1.Controllers
 									headerLines--;
 									continue;
 								}
+								if(reader.GetValue(0)==null)//to stop code from reading useless data from sheet and break
+                                {
+                                    break;
+                                }
 								var componentMasterName= reader.GetValue(1).ToString();
 								int id=_context.ComponentMaster.Where(x=>x.Component_Name==componentMasterName).Select(x=>x.ComponentMasterId).FirstOrDefault<int>();
 								if (id == 0) //if component master not found
@@ -111,7 +115,7 @@ namespace BHEL_Project_1.Controllers
 					}
 				}
 			}
-			return View();
+			return View("Index");
 		}
 
 	}
