@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BHEL_Project_2.Models.Component>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-6">
+        <h1>Index</h1>
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    </div>
+    <div class="col-6 ">
+        ﻿<form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload one or more files using this form:</p>
+                    <input type="file" name="file" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" asp-controller="Components" asp-action="UploadExcel" class="btn btn-danger" value="Upload Excel  File" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Component_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Serial_Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Make)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlternateMake_1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlternateMake_2)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Component_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serial_Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlternateMake_1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlternateMake_2)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ComponentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ComponentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ComponentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

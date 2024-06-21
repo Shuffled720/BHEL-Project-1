@@ -1,0 +1,58 @@
+﻿@model BHEL_Project_2.Models.Component
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Component</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Component_Name" class="control-label"></label>
+                <input asp-for="Component_Name" class="form-control" />
+                <span asp-validation-for="Component_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ref" class="control-label"></label>
+                <input asp-for="Ref" class="form-control" />
+                <span asp-validation-for="Ref" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serial_Number" class="control-label"></label>
+                <input asp-for="Serial_Number" class="form-control" />
+                <span asp-validation-for="Serial_Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Make" class="control-label"></label>
+                <input asp-for="Make" class="form-control" />
+                <span asp-validation-for="Make" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlternateMake_1" class="control-label"></label>
+                <input asp-for="AlternateMake_1" class="form-control" />
+                <span asp-validation-for="AlternateMake_1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlternateMake_2" class="control-label"></label>
+                <input asp-for="AlternateMake_2" class="form-control" />
+                <span asp-validation-for="AlternateMake_2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
