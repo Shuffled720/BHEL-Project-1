@@ -177,7 +177,7 @@ namespace BHEL_Project_2.Controllers
                     {
                         do
                         {
-                            int headerLines = 3;//to skip 5 lines of header in excel sheet
+                            int headerLines = 3;//to skip 3 lines of header in excel sheet
                             while (reader.Read())
                             {
                                if(headerLines != 0)
@@ -186,12 +186,14 @@ namespace BHEL_Project_2.Controllers
                                     continue;
                                 }
                                 var component = new Component();
-                                component.Component_Name = reader.GetValue(0).ToString();
-                                component.Ref = reader.GetValue(1).ToString();
-                                component.Serial_Number = reader.GetValue(2).ToString();
-                                component.Make = reader.GetValue(4).ToString();
-                                //component.AlternateMake_1 = reader.GetValue(4).ToString();
-                                //component.AlternateMake_2 = reader.GetValue(5).ToString();
+                                if (reader.GetValue(0) == null) continue;
+                                component.Component_Name = (reader.GetValue(0) != null) ? reader.GetValue(0).ToString() : "";
+                                component.Ref = (reader.GetValue(1) != null) ? reader.GetValue(1).ToString() : "";
+                                component.Specification = (reader.GetValue(2) != null) ? reader.GetValue(2).ToString() : "";
+                                component.Serial_Number = (reader.GetValue(3) != null) ? reader.GetValue(3).ToString() : "";
+                                component.Make = (reader.GetValue(4) != null) ? reader.GetValue(4).ToString() : "";
+                                component.AlternateMake_1 = (reader.GetValue(4) != null) ? reader.GetValue(4).ToString() : "";
+                                component.AlternateMake_2 = (reader.GetValue(5) != null) ? reader.GetValue(5).ToString() : "";
                                 _context.Add(component);
                                 await _context.SaveChangesAsync();
                             }
